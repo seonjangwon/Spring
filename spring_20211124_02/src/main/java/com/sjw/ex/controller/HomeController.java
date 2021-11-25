@@ -1,10 +1,14 @@
 package com.sjw.ex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sjw.ex.dto.TraineeDTO;
 import com.sjw.ex.service.TraineeService;
@@ -17,28 +21,64 @@ public class HomeController {
 	@Autowired
 	private TraineeService ts;
 //	TraineeService ts = new TraineeService();
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 
 		return "index";
 	}
-	
-	@RequestMapping(value="/insert")
+
+	@RequestMapping(value = "/insert")
 	public String insert() {
-		
+
 		return "insert";
 	}
-	
-	@RequestMapping(value="/insertparam", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/insertparam", method = RequestMethod.POST)
 	public String insertparam(@ModelAttribute TraineeDTO trainee) {
-		
+
 		// TraineeService에 있는 insert메서드 호출하면서 trainee 객체를 넘긴다면
 		ts.insert(trainee);
-		
+
 		System.out.println(trainee);
+
+		return "index";
+	}
+
+	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	public String findAll(Model model) {
 		
-		return "success";
+		List<TraineeDTO> tList = ts.findAll();
+		
+		model.addAttribute("tList", tList);
+		
+//		ts.findAll();
+
+		return "findAll";
 	}
 	
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String detail(Model model, @RequestParam("t_number") long t_number) {
+		System.out.println(t_number);
+		
+		// TraineeService.findById()
+		// TraineeRepository.findById() (mapper호출시 sql.selectOne()사용)
+		// trainee-mapper.findById 호출 (mapper에서 parameterType="long")
+		
+		// 호출하고 역순으로 리턴을 가져와서()리턴타입이 뭐가 돼야 할지 관건)
+		// 결과 출력은 detail.jsp에서 객체값을 출력
+		
+		TraineeDTO t = ts.findById(t_number);
+		
+		model.addAttribute("t_number",t);
+		
+		return "detail";
+	}
+	
+	
+	
+	
+	
+
 }

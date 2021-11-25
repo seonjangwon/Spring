@@ -14,4 +14,10 @@ public class TraineeDTO {
 	private Date t_birth;
 	private String t_address;
 	
+	
+	
+	
+	
+	
+	
 }
