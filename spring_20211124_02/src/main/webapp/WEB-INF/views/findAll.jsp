@@ -22,6 +22,8 @@
 				<th>생일</th>
 				<th>주소</th>
 				<th>상세조회</th>
+				<th>삭제</th>
+				<th>수정</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,6 +40,8 @@
 					링크로 서버에 데이터 전송
 					서버에서 t_number를 받아서 출력해보세요 -->
 				<td><a href="detail?t_number=${t.t_number}">조회</a></td>
+				<td><a href="delete?t_number=${t.t_number}">삭제</a></td>
+				<td><a href="update?t_number=${t.t_number}">수정</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>

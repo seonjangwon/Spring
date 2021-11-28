@@ -13,5 +13,17 @@
  	<select id="findById" resultType="tdto" parameterType="long">
  		select * from trainee where t_number=#{t_number}
  	</select>
+ 	<delete id="deleteById" parameterType="long">
+ 		delete from trainee where t_number=#{t_number}
+ 	</delete>
+ 	<update id="update" parameterType="tdto">
+ 		update trainee set t_name=#{t_name}, t_age=#{t_age}, t_phone=#{t_phone}, t_gender=#{t_gender}, t_birth=#{t_birth}, t_address=#{t_address} where t_number=#{t_number}
+ 		<!-- update trainee set t_age=#{t_age} where t_number=#{t_number}
+ 		update trainee set t_phone=#{t_phone} where t_number=#{t_number}
+ 		update trainee set t_gender=#{t_gender} where t_number=#{t_number}
+ 		update trainee set t_birth=#{t_birth} where t_number=#{t_number}
+ 		update trainee set t_address=#{t_address} where t_number=#{t_number} -->
+ 		
+ 	</update>
  	
  </mapper>

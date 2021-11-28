@@ -46,4 +46,23 @@ public class TraineeService {
 		return t;
 	}
 
+
+
+	public void deleteById(long t_number) {
+		
+		tr.deleteById(t_number);
+		
+	}
+
+
+
+	public void update(TraineeDTO trainee) {
+		tr.update(trainee);
+		
+	}
+
+
+
+
+
 }

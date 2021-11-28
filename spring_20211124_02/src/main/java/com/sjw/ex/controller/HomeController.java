@@ -76,9 +76,35 @@ public class HomeController {
 		return "detail";
 	}
 	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(@RequestParam("t_number") long t_number) {
+		ts.deleteById(t_number);
+		
+		// 삭제처리후 단순히 findAll.jsp만 출력한 결과
+//		return "findAll";
+		
+		// 삭제가 반영된 목록을 다시 요청해야하며,
+		// 다시 요청하는 방식으 redirect
+		// redirect를 할 때는 컨트롤러의 주소를 요청해야함
+		return "redirect:/findAll";
+	}
 	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String updatepage(Model model, @RequestParam("t_number") long t_number) {
+		
+		TraineeDTO t = ts.findById(t_number);
+		
+		model.addAttribute("trainee",t);
+		
+		return "update";
+	}
 	
-	
-	
+	@RequestMapping(value = "/updateparam", method = RequestMethod.POST)
+	public String updateparam(@ModelAttribute TraineeDTO trainee) {
+		
+		ts.update(trainee);
+		
+		return "redirect:/findAll";
+	}
 
 }

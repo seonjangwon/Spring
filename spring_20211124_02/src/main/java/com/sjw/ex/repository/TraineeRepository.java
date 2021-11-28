@@ -29,4 +29,16 @@ public class TraineeRepository {
 		return sql.selectOne("Trainee.findById", t_number);
 	}
 
+	public void deleteById(long t_number) {
+		sql.delete("Trainee.deleteById", t_number);
+		
+	}
+
+	public void update(TraineeDTO trainee) {
+		sql.update("Trainee.update", trainee);
+		
+	}
+
+
+
 }
