@@ -1,5 +1,7 @@
 package com.icia.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,26 @@ public class MemberService {
 		
 	}
 
-	public int signin(MemberDTO member) {
+	public MemberDTO signin(MemberDTO member) {
 
-		Integer result = mr.signin(member);
+		MemberDTO result = mr.signin(member);
 		
 		return result;
+	}
+
+	public List<MemberDTO> findAll() {
+		
+		return mr.findAll();
+	}
+
+	public MemberDTO detail(long m_number) {
+		MemberDTO m = mr.detail(m_number);
+		return m;
+	}
+
+	public void delete(long m_number) {
+		mr.delete(m_number);
+		
 	}
 
 }

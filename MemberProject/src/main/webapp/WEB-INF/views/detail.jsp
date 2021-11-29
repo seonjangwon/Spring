@@ -7,11 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>index</h2>
+<h2>detail</h2>
+
+	${mdto.m_number}
+	${mdto.m_id}
+	${mdto.m_password}
+	${mdto.m_name}
+	${mdto.m_email}
+	${mdto.m_phone}
 	
-	<a href="insert">회원가입</a>
-	<a href="login">로그인</a>
-	
-	${sessionScope.loginById}
+
+
 </body>
 </html>
