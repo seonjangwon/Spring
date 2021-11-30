@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.member.dto.MemberDTO;
 import com.icia.member.service.MemberService;
@@ -106,4 +107,55 @@ public class MemberController {
 		
 		return "redirect:/findAll";
 	}
+	
+	
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String updatepage(Model model, @RequestParam("m_number") long m_number) {
+		
+		MemberDTO m = ms.detail(m_number);
+		model.addAttribute("mdto",m);
+		
+		return "update";
+	}
+	
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateparam( @ModelAttribute MemberDTO m) {
+		
+		ms.update(m);
+		
+		return "redirect:/detail?m_number="+(m.getM_number());
+	}
+	
+	
+	@RequestMapping(value = "/idDuplicate", method = RequestMethod.POST)
+	public @ResponseBody String idDuplicate(@RequestParam("m_id") String m_id) {
+		
+		System.out.println("MemberController.idDuplicate()"+m_id);
+		
+		String result= ms.idDuplicate(m_id);
+		
+		return result; // "ok" or "no"
+	}
+	
+	
+	@RequestMapping(value = "/detailAjax", method = RequestMethod.POST)
+	public @ResponseBody MemberDTO detailAjax(@RequestParam("m_number") long m_number) {
+		
+		MemberDTO m = ms.detail(m_number);
+		
+		return m;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

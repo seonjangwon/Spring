@@ -16,7 +16,9 @@
 	${mdto.m_email}
 	${mdto.m_phone}
 	
-
+	<a href="/">홈(/)</a>
+	<a href="./">홈(./)</a>
+	<a href="../">홈(../)</a>
 
 </body>
 </html>

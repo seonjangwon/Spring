@@ -41,4 +41,17 @@ public class MemberService {
 		
 	}
 
+	public void update(MemberDTO m) {
+		mr.update(m);
+		
+	}
+
+	public String idDuplicate(String m_id) {
+		String result = mr.idDuplicate(m_id);
+		if(result==null)
+			return "ok";
+		else
+		return "no";
+	}
+
 }

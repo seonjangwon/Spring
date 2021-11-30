@@ -38,4 +38,14 @@ public class MemberRepository {
 		
 	}
 
+	public void update(MemberDTO m) {
+		sql.update("member.update", m);
+		
+	}
+
+	public String idDuplicate(String m_id) {
+		String result = sql.selectOne("member.idDuplicate", m_id);
+		return result;
+	}
+
 }
