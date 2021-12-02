@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>insert</h2>
-	<form action="write" method="post">
+	<form action="/board/write" method="post">
 	작성자 : <input type="text" name="b_writer"><br>
 	비밀번호 : <input type="password" name="b_password"><br>
 	제목 : <input type="text" name="b_title"><br>

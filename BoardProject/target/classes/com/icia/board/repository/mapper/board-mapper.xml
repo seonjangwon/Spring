@@ -25,8 +25,8 @@
 		update board set b_title=#{b_title}, b_contents=#{b_contents} where b_number=#{b_number}
 	</update>
 	
-	<select id="search" parameterType="String" resultType="List">
-		select b_title from board where like b_title '#{b_title}%%'
+	<select id="search" parameterType="String" resultType="bdto">
+		select * from board where b_title like ('%', #{b_title}, '%')
 	</select>
 	
 </mapper>

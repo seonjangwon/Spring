@@ -2,6 +2,7 @@ package com.icia.board.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,8 +46,10 @@ public class BoardRepository {
 		
 	}
 
-	public List<BoardDTO> search(String b_title) {
-		List<BoardDTO> tList = sql.selectList("board.search", b_title);
+	public List<BoardDTO> search(String b) {
+		RowBounds rowBounds = new RowBounds(10,1);
+		List<BoardDTO> tList = sql.selectList("board.search", b, rowBounds);
+		
 		return tList;
 	}
 

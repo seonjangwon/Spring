@@ -45,8 +45,8 @@ public class BoardService {
 		
 	}
 
-	public List<BoardDTO> search(String b_title) {
-		List<BoardDTO> tList = br.search(b_title);
+	public List<BoardDTO> search(String b) {
+		List<BoardDTO> tList = br.search(b);
 		return tList;
 	}
 

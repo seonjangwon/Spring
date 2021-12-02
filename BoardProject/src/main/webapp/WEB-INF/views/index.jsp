@@ -8,7 +8,8 @@
 </head>
 <body>
 	<h2>index</h2>
-	<a href="insert">글쓰기 페이지</a>
-	<a href="findAll">글목록 페이지</a>
+	<a href="/board/insert">글쓰기 페이지</a><br>
+	<a href="/board/findAll">글목록 페이지</a><br>
+	<a href="/board/paging">페이징 페이지</a><br>
 </body>
 </html>

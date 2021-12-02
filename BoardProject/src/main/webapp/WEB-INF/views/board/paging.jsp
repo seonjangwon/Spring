@@ -2,21 +2,22 @@
 	pageEncoding="UTF-8"%>
 <!-- JSTL(JSP Standard Tag Library)사용 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-
-</script>
 </head>
 <body>
-	<h2>findAll</h2>
-	
-	
+	<h2>paging</h2>
+	<nav>
+		<ul>
+			<li><button>1</button></li>
+			<li><button>2</button></li>
+			<li><button>3</button></li>
+		</ul>
+	</nav>
 	<table>
 		<thead>
 			<tr>
@@ -36,20 +37,18 @@
 			<c:forEach items="${bList}" var="b">
 				<tr>
 					<td>${b.b_number}</td>
-					<td>${b.b_writer}</td>
-					<td>${b.b_title}</td>
+					<td><a href="/board/detail?b_number=${b.b_number}">${b.b_writer}</a></td>
+					<td><a href="/board/detail?b_number=${b.b_number}">${b.b_title}</a></td>
 					<td>${b.b_contents}</td>
 					<td>${b.b_hits}</td>
 					<td>${b.b_date}</td>
-					<td><fmt:formatDate value='${b.b_date}' pattern="HH:mm:ss"/></td>
-					<td><a href="detail?b_number=${b.b_number}">조회</a></td>
-					<td><a href="delete?b_number=${b.b_number}">삭제</a></td>
-					<td><a href="update?b_number=${b.b_number}">수정</a></td>
+					<td><fmt:formatDate value='${b.b_date}' pattern="HH:mm:ss" /></td>
+					<td><a href="/board/detail?b_number=${b.b_number}">조회</a></td>
+					<td><a href="/board/delete?b_number=${b.b_number}">삭제</a></td>
+					<td><a href="/board/update?b_number=${b.b_number}">수정</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<input type="text" id="search" onkeyup="Search()" placeholder="검색">
-	
 </body>
 </html>
