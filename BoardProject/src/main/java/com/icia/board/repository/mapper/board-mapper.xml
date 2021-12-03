@@ -25,8 +25,34 @@
 		update board set b_title=#{b_title}, b_contents=#{b_contents} where b_number=#{b_number}
 	</update>
 	
-	<select id="search" parameterType="String" resultType="bdto">
-		select * from board where b_title like ('%', #{b_title}, '%')
+		<select id="pagingList" parameterType="int" resultType="bdto">
+		select * from board order by b_number desc limit #{pagingStart}, 3
 	</select>
 	
+	<select id="pagingList1" parameterType="java.util.HashMap" resultType="bdto">
+		select * from board order by b_number desc limit #{start}, #{limit}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(b_number) from board
+	</select>
+	
+	<!-- <select id="search" parameterType="java.util.HashMap" resultType="bdto">
+		select * from board where ${type} like concat('%', #{word}, '%')	
+	</select> -->
+	<select id="search" parameterType="java.util.HashMap" resultType="bdto">
+		select * from board 			
+		<include refid="sear"></include>
+	</select>
+	
+	<sql id="sear">
+		<choose>
+			<when test="type=='b_title'">
+				where b_title like concat('%', #{word}, '%') 
+			</when>
+			<when test="type=='b_writer'">
+				where b_writer like concat('%', #{word}, '%') 
+			</when>
+		</choose>
+	</sql>
 </mapper>

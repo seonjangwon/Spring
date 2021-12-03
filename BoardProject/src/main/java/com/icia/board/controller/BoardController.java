@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
 
 @Controller
@@ -45,14 +45,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String detail(Model model, @RequestParam("b_number") long b_number) {
+	public String detail(Model model, @RequestParam("b_number") long b_number, @RequestParam(value="page", required=false, defaultValue="1")int page) {
 		
 		bs.hits(b_number);
 		
 		BoardDTO b = bs.detail(b_number); // 조회
 		System.out.println(b);
 		model.addAttribute("b",b);
-		
+		model.addAttribute("page", page);
 		return "board/detail";
 	}
 	
@@ -66,40 +66,42 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public String updatepage(Model model, @RequestParam("b_number") long b_number) {
+	public String updatepage(Model model, @RequestParam("b_number") long b_number, @RequestParam(value="page", required=false, defaultValue="1")int page) {
 		
 		BoardDTO b =bs.detail(b_number);
 		
 		model.addAttribute("b",b);
-		
+		model.addAttribute("page", page);
 		return "board/update"; 
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@ModelAttribute BoardDTO b) {
+	public String update(Model model,@ModelAttribute BoardDTO b,@RequestParam(value="page", required=false, defaultValue="1")int page) {
 		bs.update(b);
-		return "redirect:/board/findAll";
+		model.addAttribute("page", page);
+		return "redirect:/board/detail?page="+page+"&b_number="+b.getB_number();
 	}
 	
 	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public String search(Model model, @RequestParam("b_title") String b) {
-		
-		List<BoardDTO> tList = bs.search(b);
-		
-		model.addAttribute("bList", tList);
-		
-		return "board/search";
+
+	
+	
+	@RequestMapping(value="paging", method=RequestMethod.GET)
+	// value는 파라미터이름 , required는 필수 여부
+	public String paging(@RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
+		PageDTO paging = bs.paging(page);
+		List<BoardDTO> boardList = bs.pagingList(page);
+		model.addAttribute("bList", boardList);
+		model.addAttribute("paging", paging);
+		return "board/findAll";
 	}
 	
-	
-	@RequestMapping(value = "paging", method = RequestMethod.GET)
-	public String paging() {
-		
-		return "board/paging";
+	@RequestMapping(value="search", method = RequestMethod.GET)
+	public String search(@RequestParam("searchtype") String searchtype, @RequestParam("keyword") String keyword, Model model) {
+		List<BoardDTO> bList = bs.search(searchtype,keyword);
+		model.addAttribute("bList", bList);
+		return "board/findAll";
 	}
-	
-	
 	
 	
 }

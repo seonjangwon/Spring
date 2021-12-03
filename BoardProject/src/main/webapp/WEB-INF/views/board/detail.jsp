@@ -18,5 +18,7 @@
 	작성날짜 : ${b.b_date}<br>
 	<fmt:formatDate value='${b.b_date}' pattern="yyyy.MM.dd"/>
 	<fmt:formatDate value='${b.b_date}' pattern="HH:mm:ss"/>
+	
+	<a href="/board/paging?page=${page}">목록</a>
 </body>
 </html>

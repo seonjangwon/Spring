@@ -1,6 +1,7 @@
 package com.icia.board.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,11 +47,23 @@ public class BoardRepository {
 		
 	}
 
-	public List<BoardDTO> search(String b) {
-		RowBounds rowBounds = new RowBounds(10,1);
-		List<BoardDTO> tList = sql.selectList("board.search", b, rowBounds);
+
+	
+	public int boardCount() {
+		return sql.selectOne("board.count");
+	}
+	
+	public List<BoardDTO> pagingList(int pagingStart) {
+		return sql.selectList("board.pagingList", pagingStart);
+	}
+
+	public List<BoardDTO> pagingList1(Map<String, Integer> pagingParam) {
+		return sql.selectList("board.pagingList1", pagingParam);
+	}
+
+	public List<BoardDTO> search(Map<String, String> searchParam) {
 		
-		return tList;
+		return sql.selectList("board.search", searchParam);
 	}
 
 }

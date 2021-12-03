@@ -29,7 +29,8 @@
 	작성날짜 : ${b.b_date}<br>
 	
 	<form action="/board/update" method="post" name="update_form">
-	<input type="hidden" name="b_number" value="${b.b_number}">
+	<input type="hidden" name="b_number" value="${page}">
+	<input type="hidden" name="page" value="${b.b_number}">
 	작성자 : <input type="text" name="b_writer" value="${b.b_writer}" readonly><br>
 	비밀번호 : <input type="password" name="b_password" id="b_pw"><br>
 	제목 : <input type="text" name="b_title" value="${b.b_title}"><br>
