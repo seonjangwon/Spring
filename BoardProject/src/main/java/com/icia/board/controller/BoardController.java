@@ -1,5 +1,6 @@
 package com.icia.board.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.CommentDTO;
 import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
+import com.icia.board.service.CommentInter;
 
 @Controller
 @RequestMapping(value="/board/*")
@@ -20,6 +23,8 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService bs;
+	@Autowired
+	private CommentInter cs;
 	
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String insert() {
@@ -33,6 +38,13 @@ public class BoardController {
 		bs.write(b);
 		
 		return "redirect:/board/findAll"; // 일단 인덱스로 해두고 파인드올으로 바꾸자
+	}
+	
+	@RequestMapping(value = "writefile", method = RequestMethod.POST)
+	public String writefile(@ModelAttribute BoardDTO b) throws IllegalStateException, IOException {
+		bs.saveFile(b);
+		
+		return "redirect:/board/paging"; 
 	}
 	
 	@RequestMapping(value = "findAll", method = RequestMethod.GET)
@@ -53,6 +65,10 @@ public class BoardController {
 		System.out.println(b);
 		model.addAttribute("b",b);
 		model.addAttribute("page", page);
+		
+		List<CommentDTO> cList = cs.findAll(b_number);
+		model.addAttribute("commentList", cList);
+		
 		return "board/detail";
 	}
 	
@@ -102,6 +118,8 @@ public class BoardController {
 		model.addAttribute("bList", bList);
 		return "board/findAll";
 	}
+	
+	
 	
 	
 }

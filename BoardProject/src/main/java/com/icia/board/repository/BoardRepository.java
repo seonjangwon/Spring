@@ -66,4 +66,9 @@ public class BoardRepository {
 		return sql.selectList("board.search", searchParam);
 	}
 
+	public void saveFile(BoardDTO board) {
+		sql.insert("board.saveFile", board);
+		
+	}
+
 }

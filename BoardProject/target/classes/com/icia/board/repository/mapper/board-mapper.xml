@@ -7,6 +7,12 @@
 		insert into board(b_writer, b_password, b_title, b_contents,b_hits, b_date)
 			value(#{b_writer}, #{b_password}, #{b_title}, #{b_contents}, 0, now())
 	</insert>
+	
+	<insert id="saveFile" parameterType="bdto">
+		insert into board(b_writer, b_password, b_title, b_contents,b_hits, b_date, b_filename)
+			value(#{b_writer}, #{b_password}, #{b_title}, #{b_contents}, 0, now(), #{b_filename})
+	</insert>
+	
 	<select id="findAll" resultType="bdto">
 		select * from board
 	</select>

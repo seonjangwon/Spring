@@ -37,6 +37,7 @@
 				<th>조회</th>
 				<th>삭제</th>
 				<th>수정</th>
+				<th>사진</th>
 			</tr>
 		</thead>
 		<tbody>
