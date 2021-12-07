@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="board">
+	<insert id="write" parameterType="bdto">
+		insert into board(b_title, m_id, b_contents, b_date, b_filename)
+			value(#{b_title}, #{m_id}, #{b_contents}, now(), #{b_filename})
+	</insert>
+	
+	<select id="count" resultType="int">
+		select count(b_number) from board
+	</select>
+	
+	<select id="paging" parameterType="java.util.HashMap" resultType="bdto">
+		select * from board order by b_number desc limit #{start}, #{limit}
+	</select>
+	
+	<delete id="delete" parameterType="long">
+		delete from board where b_number= #{b_number}
+	</delete>
+	
+	<select id="detail" parameterType="long" resultType="bdto">
+		select * from board where b_number = #{b_number}
+	</select>
+	
+	<update id="update" parameterType="bdto">
+		update board set b_title=#{b_title}, b_contents=#{b_contents}, b_filename=#{b_filename} where m_id=#{m_id}
+	</update>
+</mapper>
