@@ -11,6 +11,15 @@
 <body>
 	<h2>findAll</h2>
 	<a href="/">홈</a>
+	<form action="/board/search" method="get">
+		<select name="searchtype">
+			<option value="b_title">제목</option>
+			<option value="b_contents">내용</option>
+		</select>
+		<input type="text" name="keyword">
+		<input type="submit" value="검색">
+	</form>
+	
 	<table>
 	<tr>
 	<th>글번호</th>

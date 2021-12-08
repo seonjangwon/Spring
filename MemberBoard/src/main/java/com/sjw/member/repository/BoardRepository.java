@@ -45,4 +45,19 @@ public class BoardRepository {
 		
 	}
 
+	public List<BoardDTO> search(Map<String, String> search) {
+		
+		return sql.selectList("board.search", search);
+	}
+
+	public void hits(long b_number) {
+		sql.update("board.hits", b_number);
+		
+	}
+
+	public List<BoardDTO> findBym_id(String m_id) {
+		
+		return sql.selectList("board.findBym_id", m_id);
+	}
+
 }

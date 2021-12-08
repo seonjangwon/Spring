@@ -27,6 +27,7 @@
 	</tr>
 	</table>
 	<a href="/member/update">수정</a>
+	<a href="/member/myboard?m_id=${loginDTO.m_id}">내 게시글 목록</a>
 	<a href="/">홈</a>
 	
 </body>

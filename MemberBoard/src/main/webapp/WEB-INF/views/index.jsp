@@ -26,14 +26,14 @@
 	<c:choose>
 		<c:when test="${loginDTO.m_id eq 'admin'}">
 			<h3>로그인 정보</h3>
-	아이디 : ${loginDTO.m_id} 이름 : ${loginDTO.m_name}
+			아이디 : ${loginDTO.m_id} 이름 : ${loginDTO.m_name}
 			<h3>관리자 메뉴</h3>
 			<a href="/member/admin">관리자 페이지</a>
 		</c:when>
 		<c:when test="${loginDTO.m_id != null}">
 			<h3>로그인 정보</h3>
-	아이디 : ${loginDTO.m_id} 이름 : ${loginDTO.m_name}사진 :
-	<img alt="dd" src="/resources/upload/${loginDTO.m_filename}">
+			아이디 : ${loginDTO.m_id} 이름 : ${loginDTO.m_name}사진 :
+			<img alt="dd" src="/resources/upload/${loginDTO.m_filename}">
 			<h3>회원 메뉴</h3>
 			<a href="/member/mypage">마이페이지</a>
 		</c:when>

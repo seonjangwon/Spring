@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sjw.member.dto.BoardDTO;
+import com.sjw.member.dto.CommentDTO;
 import com.sjw.member.dto.PageDTO;
 import com.sjw.member.service.BoardService;
+import com.sjw.member.service.CommentService;
 
 @Controller
 @RequestMapping(value="/board/*")
@@ -21,6 +23,8 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService bs;
+	@Autowired
+	private CommentService cs;
 	
 	@RequestMapping(value="write", method = RequestMethod.GET)
 	public String writepage() {
@@ -53,7 +57,11 @@ public class BoardController {
 	
 	@RequestMapping(value="detail", method = RequestMethod.GET)
 	public String detail(Model model, @RequestParam("b_number") long b_number) {
+		bs.hits(b_number);
 		BoardDTO b = bs.detail(b_number);
+		
+		List<CommentDTO> cList = cs.findAll(b_number);
+		model.addAttribute("cList", cList);
 		model.addAttribute("b", b);
 		return "/board/detail";
 	}
@@ -71,5 +79,13 @@ public class BoardController {
 		
 		return "/board/detail?b_number="+b.getB_number();
 	}
+	
+	@RequestMapping(value="search", method = RequestMethod.GET)
+	public String search(Model model, @RequestParam("searchtype") String searchtype, @RequestParam("keyword") String keyword) {
+		List<BoardDTO> bList = bs.search(searchtype,keyword);
+		model.addAttribute("bList", bList);
+		return "/board/findAll";
+	}
+	
 	
 }

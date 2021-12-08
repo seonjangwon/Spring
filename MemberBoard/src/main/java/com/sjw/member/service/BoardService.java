@@ -29,7 +29,7 @@ public class BoardService {
 				b_filename = System.currentTimeMillis() + "-" + b_filename;
 				System.out.println("b_filename: " + b_filename);
 				// 파일 저장하기
-				String savePath = "D:\\development_sjw\\source\\Spring\\MemberBoard\\src\\main\\webapp\\resources\\upload\\"
+				String savePath = "D:\\development\\source\\Spring\\MemberBoard\\src\\main\\webapp\\resources\\upload\\"
 						+ b_filename;
 				// bfile이 비어있지 않다면(즉 파일이 있으면) savePath에 저장을 하겠다.
 				if (!b_file.isEmpty()) {
@@ -86,6 +86,23 @@ public class BoardService {
 	public void update(BoardDTO b) {
 		br.update(b);
 		
+	}
+
+	public List<BoardDTO> search(String searchtype, String keyword) {
+		Map<String, String> search = new HashMap<String, String>();
+		search.put("keyword", keyword);
+		search.put("searchtype", searchtype);
+		return br.search(search);
+	}
+
+	public void hits(long b_number) {
+		br.hits(b_number);
+		
+	}
+
+	public List<BoardDTO> findBym_id(String m_id) {
+		
+		return br.findBym_id(m_id);
 	}
 
 }

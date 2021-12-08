@@ -26,7 +26,7 @@ public class MemberService {
 		m_filename = System.currentTimeMillis() + "-" + m_filename;
 		System.out.println("b_filename: " + m_filename);
 		// 파일 저장하기
-		String savePath = "D:\\development_sjw\\source\\Spring\\MemberBoard\\src\\main\\webapp\\resources\\upload\\"
+		String savePath = "D:\\development\\source\\Spring\\MemberBoard\\src\\main\\webapp\\resources\\upload\\"
 				+ m_filename;
 		// bfile이 비어있지 않다면(즉 파일이 있으면) savePath에 저장을 하겠다.
 		if (!m_file.isEmpty()) {

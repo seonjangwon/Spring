@@ -5,5 +5,6 @@
 	<typeAliases> 
 		<typeAlias alias="mdto" type="com.sjw.member.dto.MemberDTO"/>
 		<typeAlias alias="bdto" type="com.sjw.member.dto.BoardDTO"/>
+		<typeAlias alias="cdto" type="com.sjw.member.dto.CommentDTO"/>
 	</typeAliases>
 </configuration>

@@ -27,4 +27,16 @@
 	<update id="update" parameterType="bdto">
 		update board set b_title=#{b_title}, b_contents=#{b_contents}, b_filename=#{b_filename} where m_id=#{m_id}
 	</update>
+	
+	<select id="search" parameterType="java.util.HashMap" resultType="bdto">
+		select * from board where ${searchtype} like concat('%', #{keyword},'%') 
+	</select>
+	
+	<update id="hits" parameterType="long">
+		update board set b_hits = b_hits+1 where b_number=#{b_number}
+	</update>
+	
+	<select id="findBym_id" parameterType="String" resultType="bdto">
+		select * from board where m_id=#{m_id}
+	</select>
 </mapper>
