@@ -95,7 +95,7 @@ public class MemberController {
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(@ModelAttribute MemberDTO m) throws IllegalStateException, IOException {
-
+		
 		ms.update(m);
 
 		return "/member/mypage";

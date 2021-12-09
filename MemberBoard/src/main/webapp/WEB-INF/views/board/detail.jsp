@@ -84,10 +84,10 @@
 						<input type="hidden" id="b_number" value="${c.b_number}">
 						<c:choose>
 							<c:when test="${loginDTO.m_id eq 'admin'}">
-								<button onclick="comment_delete()">삭제</button>
+								<a href="/comment/delete?b_number=${c.b_number}&c_number=${c.c_number}">삭제</a>
 							</c:when>
 							<c:when test="${loginDTO.m_id == c.m_id}">
-								<button onclick="comment_delete()">삭제</button>
+								<a href="/comment/delete?b_number=${c.b_number}&c_number=${c.c_number}">삭제</a>
 							</c:when>
 							<c:otherwise>
 								<td>삭제 못함</td>
@@ -100,67 +100,7 @@
 </body>
 <script>
 /* 여기다 만들고 위로 올리던지 여기가 보기 편해 */
-  	function comment_delete(){
-		const c_number = document.getElementById('c_number').value;
-		const b_number = document.getElementById('b_number').value;
-		
-		const view = document.getElementById('contents-view');
-		
-		$.ajax({
-			type:'post',
-			url: '/comment/delete',
-			data: {"b_number": b_number, "c_number":c_number},
-			datatype: 'json',
-			success: function(result){
-				console.log('ajax ');
-				console.log(result);
-				
-				
-				
-				let output = "<table>";
-				output += "<tr>";
-				output += "<th>번호</th>";
-				output += "<th>작성자</th>";
-				output += "<th>내용</th>";
-				output += "<th>작성시간</th>";
-				output += "<th>삭제</th>";
-				output += "</tr>";
-				$.each(result, function(i){
-					let contents = result[i].c_contents;
-					
-					output += "<tr>";
-					output += "<td>"+(i+1)+"</td>";
-					output += "<td>"+result[i].m_id+"</td>";
-					if(contents.indexOf("ㅅㅂ")==-1){
-						output += "<td>"+result[i].c_contents+"</td>";
-					}else{
-						output += "<td>장원클린 시스템에의해 댓글이 보이지 않아요</td>";
-					}
-					
-					//output += "<td>"+result[i].c_contents+"</td>";
-					output += "<td>"+result[i].c_date+"</td>";
-					if(${loginDTO.m_id eq 'admin'}){
-						output += "<td><a href=\"/comment/delete?c_number=${c.c_number}\">삭제</a></td>";
-					} else if(${loginDTO.m_id}== result[i].m_id){
-						output += "<td><a href=\"/comment/delete?c_number=${c.c_number}\">삭제</a></td>";
-					} else {
-						output += "<td>삭제 못함</td>";
-					}
-					
-				output += "</tr>";
-				});
-				output += "<table>";
-				
-				view.innerHTML = output;
-				c_contents= "";
-			},
-			error: function(){
-				alert('실패');
-			}
-		});
-}
-  	
-  	
+
  	function comment_write(){
 		const id = document.getElementById('m_id').value;
 		const b_number = document.getElementById('b_number').value;
@@ -199,9 +139,11 @@
 					//output += "<td>"+result[i].c_contents+"</td>";
 					output += "<td>"+result[i].c_date+"</td>";
 					if(${loginDTO.m_id eq 'admin'}){
-						output += "<td><a href=\"/comment/delete?c_number=${c.c_number}\">삭제</a></td>";
+						output += "<td>";
+						output += "<a href=\"/comment/delete?b_number=${c.b_number}&c_number=${c.c_number}\">삭제</a></td>";
 					} else if(${loginDTO.m_id}== result[i].m_id){
-						output += "<td><a href=\"/comment/delete?c_number=${c.c_number}\">삭제</a></td>";
+						output += "<td>";
+						output += "<a href=\"/comment/delete?b_number=${c.b_number}&c_number=${c.c_number}\">삭제</a></td>";
 					} else {
 						output += "<td>삭제 못함</td>";
 					}
