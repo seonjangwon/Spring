@@ -22,25 +22,25 @@ public class BoardService {
 	
 	public void write(BoardDTO b) throws IllegalStateException, IOException {
 		// dto에 담긴 파일을 가져옴
-				MultipartFile b_file = b.getB_file();
-				// 파일 이름을 가져옴(파일이름을 DB에 저장하기 위해)
-				String b_filename = b_file.getOriginalFilename();
-				// 파일명 중복을 피하기 위해 파일이름앞에 현재 시간값을 붙임.
-				b_filename = System.currentTimeMillis() + "-" + b_filename;
-				System.out.println("b_filename: " + b_filename);
+		MultipartFile b_file = b.getB_file();
+		// 파일 이름을 가져옴(파일이름을 DB에 저장하기 위해)
+		String b_filename = b_file.getOriginalFilename();
+		// 파일명 중복을 피하기 위해 파일이름앞에 현재 시간값을 붙임.
+		b_filename = System.currentTimeMillis() + "-" + b_filename;
+		System.out.println("b_filename: " + b_filename);
 				// 파일 저장하기
-				String savePath = "D:\\development\\source\\Spring\\MemberBoard\\src\\main\\webapp\\resources\\upload\\"
-						+ b_filename;
-				// bfile이 비어있지 않다면(즉 파일이 있으면) savePath에 저장을 하겠다.
-				if (!b_file.isEmpty()) {
-					b_file.transferTo(new File(savePath));
-				}
-				// 여기까지의 내용은 파일을 저장하는 과정
+		String savePath = "D:\\development\\source\\Spring\\MemberBoard\\src\\main\\webapp\\resources\\upload\\"
+					+ b_filename;
+		// bfile이 비어있지 않다면(즉 파일이 있으면) savePath에 저장을 하겠다.
+		if (!b_file.isEmpty()) {
+			b_file.transferTo(new File(savePath));
+		}
+		// 여기까지의 내용은 파일을 저장하는 과정
 
-				// DB에 저장하기 위해 DTO에 파일이름을 담는다
-				b.setB_filename(b_filename);
+		// DB에 저장하기 위해 DTO에 파일이름을 담는다
+		b.setB_filename(b_filename);
 
-				// DB의 board에 파일이름을 저장할 b_filename이라는 컬럼 추가(타입은 varchar(100))
+		// DB의 board에 파일이름을 저장할 b_filename이라는 컬럼 추가(타입은 varchar(100))
 		br.write(b);
 		
 	}
